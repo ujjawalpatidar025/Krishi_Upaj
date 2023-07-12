@@ -1,11 +1,18 @@
-import './App.css';
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import LoginPage from "./Pages/LoginPage.jsx";
+import SignUp from "./Pages/SignUp.jsx";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <p>ujjawal</p>
+    <div>
+      
+      <Routes>
+        <Route path="/signin" element={<LoginPage/> } />
+        <Route path="/signup" element={<SignUp/>} />
+      </Routes>
     </div>
   );
-}
+};
 
 export default App;
