@@ -8,7 +8,7 @@ const LoginPage = () => {
     <div className="flex flex-col md:flex-row h-screen">
       {/* Left Section */}
       <div className="flex flex-col justify-center items-center md:w-1/2 bg-gray-100 text-white">
-        <img src={Logo} className='h-full w-full' />
+        <img src={Logo} className='h-full w-full md-h-4' />
         
       </div>
 
@@ -37,6 +37,9 @@ const LoginPage = () => {
               type="password"
               placeholder="Password"
             />
+             
+                       
+            {/* <h2 className='absolute top-[51%] right-[12%] text-xl bg-green-300 w-12'>Show</h2> */}
           </div>
           <div className="flex items-center justify-between">
             <button
