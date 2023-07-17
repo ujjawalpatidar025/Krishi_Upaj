@@ -1,14 +1,42 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
+import axios from 'axios';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useDispatch } from "react-redux";
+import { add, gettoken } from "../Redux/Slices/authReducer";
 
 import Logo from "../Images/Logos/png/logo-color.png";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [username, setusername] = useState("");
+  const [password, setpassword] = useState("");
   const [submitLoader, setsubmitLoader] = useState(false);
-  const handleSubmit = () => {
+  const handleSubmit = async(e) => {
     setsubmitLoader(true);
-    
-    
+    e.preventDefault();
+    try{
+      const response = await axios.post('http://localhost:4000/api/users/signup',{username,password});
+      console.log(response);
+      if(response.data.status=='false')
+      toast.error(response.data.message);
+      else{
+        toast.success(response.data.message);
+        localStorage.setItem('token',response.data.token);
+        dispatch(add(response.data.others));
+        dispatch(gettoken(response.data.token));
+        navigate('/');
+      }
+      setsubmitLoader(false);
+
+    }
+    catch(err)
+    {
+      toast.error(err.response.data.message);
+      setsubmitLoader(false);
+    }
   };
   return (
     <div className="flex flex-col md:flex-row h-screen">
@@ -30,9 +58,11 @@ const SignUp = () => {
             </label>
             <input
               className="appearance-none border rounded w-full py-2 px-3 shadow-md shadow-green-800 text-green-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="email"
+              id="username"
               type="email"
               placeholder="Email"
+              onChange={(e)=>setusername(e.target.value)}
+              value={username}
             />
           </div>
           <div className="mb-6">
@@ -47,9 +77,13 @@ const SignUp = () => {
               id="password"
               type="password"
               placeholder="Password"
+              onChange={(e)=>setpassword(e.target.value)}
+              value={password}
             />
-          </div>
+             <div className="text-sm text-white font-medium">Password must contain 8 characters consists of 1 lowercase, 1 uppercase, 1 digit and 1 special character</div>
 
+          </div>
+         
           {submitLoader ? (
             <>
               <div role="status" className="text-center">
