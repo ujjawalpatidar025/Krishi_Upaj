@@ -1,22 +1,25 @@
 import React, { useState } from "react";
 import logo from "../Images/Logos/png/logo-no-background.png";
 import Modals from "./Modals.jsx";
-import { Link ,useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useDispatch } from "react-redux";
+import { remove } from "../Redux/Slices/authReducer";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [modal, setmodal] = useState(false);
 
-  const handleSignout = ()=>{
-   localStorage.clear();
-    toast.success('SignOut Success')
-    navigate('/signin');
-
-  }
+  const handleSignout = () => {
+    localStorage.clear();
+    dispatch(remove());
+    toast.success("SignOut Success");
+    navigate("/signin");
+  };
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -156,7 +159,6 @@ const Navbar = () => {
                         <div class="mt-2">
                           <p class="text-sm text-gray-500">
                             Are you sure you want to SignOut your account?
-  
                           </p>
                         </div>
                       </div>
@@ -173,7 +175,7 @@ const Navbar = () => {
                     <button
                       type="button"
                       class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                      onClick={()=>setmodal(false)}
+                      onClick={() => setmodal(false)}
                     >
                       Cancel
                     </button>
@@ -224,8 +226,10 @@ const Navbar = () => {
                 Add Product
               </Link>
 
-              <Link className="text-green-700 font-bold hover:bg-green-100  hover:border-xl block px-3 py-2 rounded-md text-base font-medium"
-              onClick={()=>setmodal(true)}>
+              <Link
+                className="text-green-700 font-bold hover:bg-green-100  hover:border-xl block px-3 py-2 rounded-md text-base font-medium"
+                onClick={() => setmodal(true)}
+              >
                 Signout
               </Link>
             </div>

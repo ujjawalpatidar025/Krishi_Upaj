@@ -15,8 +15,9 @@ const authReducer = createSlice({
       state.token = action.payload;
     },
     remove: (state) => {
-      state.user = initialState;
-      state.token = initialState;
+      state.user= null;
+      state.token=null;
+      
     },
   },
 });

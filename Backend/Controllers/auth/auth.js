@@ -7,7 +7,7 @@ const { isEmail, isStrongPassword } = require("validator");
 
 const signup = async (req, resp) => {
   const { username } = req.body;
-  const userpassword=req.body.password;
+  const userpassword = req.body.password;
 
   try {
     if (!username || !userpassword)
@@ -42,11 +42,11 @@ const signup = async (req, resp) => {
         .json({ status: "false", message: "Internal Server Error" });
 
     //creating jwt token
-    const {password,...others}=user._doc;
+    const { password, ...others } = user._doc;
     const token = jwt.sign({ _id: user._id }, process.env.JWTTOKENKEY);
     resp
       .status(200)
-      .json({ status: "true", message: "SignUp Successfully", token,others });
+      .json({ status: "true", message: "SignUp Successfully", token, others });
   } catch (err) {
     console.log(err);
     resp
@@ -139,14 +139,17 @@ const updateUser = async (req, resp) => {
 const isAuthenticated = async (req, resp) => {
   try {
     const userdata = await User.findById(req.user._id);
+    const { password, ...others } = userdata._doc;
 
-    if(!userdata)
-    resp.status(404).json({status:'false',message:'You are not logged in...'})
+    if (!userdata)
+      resp
+        .status(404)
+        .json({ status: "false", message: "You are not logged in..." });
 
     resp.status(200).json({
       success: "true",
       message: "You are Authenticated",
-      userdata,
+      others,
     });
   } catch (err) {
     console.log(err);
@@ -156,4 +159,23 @@ const isAuthenticated = async (req, resp) => {
   }
 };
 
-module.exports = { signup, signin, isAuthenticated, updateUser };
+//Get User
+
+const getUser = async (req, resp) => {
+  const { _id } = req.body;
+  try {
+    const user = await User.findById({ _id });
+    const { password, ...others } = user._doc;
+    if (!user)
+      resp.status(409).json({ status: "false", message: "User not Found" });
+
+    resp.status(200).json({ status: "true", message: "User Found", others });
+  } catch (err) {
+    console.log(err);
+    resp
+      .status(500)
+      .json({ status: "false", message: err.response.data.message });
+  }
+};
+
+module.exports = { signup, signin, isAuthenticated, updateUser, getUser };
