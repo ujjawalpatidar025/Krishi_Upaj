@@ -5,6 +5,7 @@ const cors = require("cors");
 
 const authRoutes = require("./Routes/authRoutes.js");
 const machineRoutes =  require("./Routes/machineRoutes.js");
+const requestRoutes = require('./Routes/requestRoutes.js')
 
 const app = express();
 dotenv.config();
@@ -35,6 +36,7 @@ app.use(express.json());
 
 app.use("/api/users", authRoutes);
 app.use("/api/machines", machineRoutes);
+app.use("/api/requests", requestRoutes);
 // app.use("/messages", verifyToken, messageRoute);
 // app.use("/queries", verifyToken, queryRoute);
 

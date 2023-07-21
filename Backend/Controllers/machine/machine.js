@@ -46,6 +46,7 @@ const addMachine = async (req, resp) => {
       {
         machineid: machine._id,
         machinename: machine.title,
+        status:true
       },
     ];
     if (!isCreated) {
@@ -62,6 +63,7 @@ const addMachine = async (req, resp) => {
             owned: {
               machineid: machine._id,
               machinename: machine.title,
+              status:true
             },
           },
         }

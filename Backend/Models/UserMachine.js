@@ -15,6 +15,9 @@ const UserMachineSchema = new Schema(
           machinename:{
             type:String,
 
+          },
+          status:{
+            type:Boolean,
           }
         },
       ],
@@ -26,6 +29,9 @@ const UserMachineSchema = new Schema(
           machinename:{
             type:String,
 
+          },
+          requeststatus:{
+            type:String
           }
         },
       ]

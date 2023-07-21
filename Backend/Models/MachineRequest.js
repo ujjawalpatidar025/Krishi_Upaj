@@ -25,7 +25,7 @@ const MachineRequestSchema = new Schema(
           type: Number,
         },
         tenure: {
-          type: Number,
+          type: String,
         },
       },
     ],
