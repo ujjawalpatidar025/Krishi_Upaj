@@ -11,6 +11,7 @@ import { useEffect ,useState} from "react";
 import { useDispatch } from "react-redux";
 import Loading from "./Components/Loading.jsx";
 import axios from "axios";
+import Dashboard from "./Pages/Dashboard.jsx"
 import { add, gettoken } from "./Redux/Slices/authReducer.js";
 
 
@@ -42,6 +43,7 @@ const App = () => {
         <Route path="/signin" element={<LoginPage />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/" element={<ProtectedRoute component={Home} />}></Route>
+        <Route path="/dashboard" element={<ProtectedRoute component={Dashboard} />}></Route>
       </Routes>
       }
       {/* <Navbar/> */}

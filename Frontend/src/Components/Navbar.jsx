@@ -30,13 +30,13 @@ const Navbar = () => {
   };
 
   return (
-    <nav className=" sticky top-0 shadow-md shadow-gray-400">
+    <nav className=" sticky top-0 shadow-md shadow-gray-400 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
             <img className="h-12 w-auto" src={logo} alt="Logo" />
-            <div className="text-3xl h-12 w-20 font-bold mx-3 flex  text-gray-700 items-center justify-center">
+            <div className="text-3xl h-12 w-20  mx-3 flex  text-gray-700 items-center justify-center">
               <span className="text-green-500">U</span>paj
             </div>
           </div>
@@ -58,20 +58,20 @@ const Navbar = () => {
               </Link>
 
               <Link
-                href="/machines"
+                to="/machines"
                 className="text-green-700 font-medium border-x-4 border-white  hover:border-solid hover:rounded-3xl   hover:border-green-700 px-3 py-1 rounded-md  "
               >
                 Machines
               </Link>
               <Link
-                href="/dashboard"
+                to="/dashboard"
                 className="text-green-700 font-medium border-x-4 border-white  hover:border-solid hover:rounded-3xl   hover:border-green-700 px-3 py-1 rounded-md  "
               >
                 Dashboard
               </Link>
 
               <Link
-                href="/addproduct"
+                to="/addproduct"
                 className="text-green-700 font-medium border-x-4 border-white  hover:border-solid hover:rounded-3xl   hover:border-green-700 px-3 py-1 rounded-md  "
               >
                 Add Product
@@ -89,7 +89,7 @@ const Navbar = () => {
           <div className="flex sm:hidden">
             <button
               type="button"
-              className="text-green-700 font-bold  hover:border-xl px-2 py-2 rounded-md  font-medium"
+              className="text-green-700   hover:border-xl px-2 py-2 rounded-md  font-medium"
               onClick={toggleMobileMenu}
             >
               <svg
@@ -194,13 +194,13 @@ const Navbar = () => {
             <div className="px-2 pt-2 pb-3 space-y-1">
               <Link
                 to="/"
-                className="text-green-700 font-bold hover:bg-green-100  hover:border-xl block px-3 py-2 rounded-md text-base font-medium"
+                className="text-green-700  hover:bg-green-100  hover:border-xl block px-3 py-2 rounded-md text-base font-medium"
               >
                 Home
               </Link>
               <Link
                 to="/services"
-                className="text-green-700 font-bold hover:bg-green-100 hover:border-xl block px-3 py-2 rounded-md text-base font-medium"
+                className="text-green-700  hover:bg-green-100 hover:border-xl block px-3 py-2 rounded-md text-base font-medium"
               >
                 Services
               </Link>
@@ -208,26 +208,26 @@ const Navbar = () => {
 
               <Link
                 to="/machines"
-                className="text-green-700 font-bold hover:bg-green-100  hover:border-xl block px-3 py-2 rounded-md text-base font-medium"
+                className="text-green-700  hover:bg-green-100  hover:border-xl block px-3 py-2 rounded-md text-base font-medium"
               >
                 Machines
               </Link>
 
               <Link
                 to="/dashboard"
-                className="text-green-700 font-bold hover:bg-green-100  hover:border-xl block px-3 py-2 rounded-md text-base font-medium"
+                className="text-green-700  hover:bg-green-100  hover:border-xl block px-3 py-2 rounded-md text-base font-medium"
               >
                 Dashboard
               </Link>
               <Link
                 to="/addproduct"
-                className="text-green-700 font-bold hover:bg-green-100  hover:border-xl block px-3 py-2 rounded-md text-base font-medium"
+                className="text-green-700  hover:bg-green-100  hover:border-xl block px-3 py-2 rounded-md text-base font-medium"
               >
                 Add Product
               </Link>
 
               <Link
-                className="text-green-700 font-bold hover:bg-green-100  hover:border-xl block px-3 py-2 rounded-md text-base font-medium"
+                className="text-green-700  hover:bg-green-100  hover:border-xl block px-3 py-2 rounded-md text-base font-medium"
                 onClick={() => setmodal(true)}
               >
                 Signout

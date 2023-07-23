@@ -7,7 +7,7 @@ import { useEffect ,useState} from "react";
 import { useDispatch } from "react-redux";
 import Loading from "../Components/Loading.jsx";
 import axios from "axios";
-import { add, gettoken } from "../Redux/Slices/authReducer.js";
+import { add, gettoken, remove } from "../Redux/Slices/authReducer.js";
 
 const Home = () => {
   const [loading, setloading] = useState(false);
@@ -34,6 +34,7 @@ const Home = () => {
     }
     catch(err)
     {
+      dispatch(remove());
       toast.error(err.response.data.message);
       setloading(false);
       navigate('/signin');

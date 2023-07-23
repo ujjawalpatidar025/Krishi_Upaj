@@ -29,7 +29,8 @@ const signup = async (req, resp) => {
       resp
         .status(400)
         .json({ status: "false", message: "Not enought Strong Password" });
-
+    else
+    {
     const salt = bcrypt.genSalt(10);
     const hash = await bcrypt.hash(userpassword, 10);
 
@@ -47,6 +48,7 @@ const signup = async (req, resp) => {
     resp
       .status(200)
       .json({ status: "true", message: "SignUp Successfully", token, others });
+    }
   } catch (err) {
     console.log(err);
     resp
