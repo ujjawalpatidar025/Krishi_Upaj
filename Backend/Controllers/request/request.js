@@ -34,12 +34,10 @@ const rentrequest = async (req, resp) => {
       });
 
       if (flag) {
-        resp
-          .status(400)
-          .json({
-            status: "false",
-            message: "You already requested for the machine",
-          });
+        resp.status(400).json({
+          status: "false",
+          message: "You already requested for the machine",
+        });
       } else {
         const response = await MachineRequest.updateOne(
           { machineid },
@@ -85,12 +83,11 @@ const rentrequest = async (req, resp) => {
     );
 
     if (bidamount > rentamount) {
-        console.log("x");
       const amountupdateresponse = await Machine.updateOne(
         { _id: machineid },
         {
           $set: {
-            rentamount:bidamount,
+            rentamount: bidamount,
           },
         }
       );
@@ -107,39 +104,120 @@ const rentrequest = async (req, resp) => {
   }
 };
 
-
-
-
-
-
-
 // Rent Accept Controller
 
-const rentaccept = async(req,resp)=>{
+const rentaccept = async (req, resp) => {
+  const { machineid, ownerid, renterid, bidamount, tenure } = req.body;
 
-    const {machineid , ownerid ,renterid ,bidamount,tenure} = req.body;
+  try {
+    const machineresponse = await Machine.updateOne(
+      { _id: machineid },
+      {
+        $set: {
+          status: false,
+        },
+      }
+    );
 
-    try{
+    const activeRequest = new ActiveRental({
+      machineid,
+      owner: ownerid,
+      renter: renterid,
+      bidamount,
+      tenure,
+      rentstatus: "Active",
+    });
+    await activeRequest.save();
 
-        const machineresponse = await Machine.updateOne({_id:machineid},
-            {
-                $set:{
-                    status:false
-                }
-            }
-            );
+    const machinerequestlist = await MachineRequest.deleteOne({ machineid });
 
-       
+    const renteruser = await UserMachine.find({ userid: renterid });
 
+    const singlerenter = renteruser[0];
 
+    const renterrequestmachinelist = singlerenter.rented;
+    renterrequestmachinelist.forEach((item) => {
+      if (item.machineid === machineid) {
+        item.requeststatus = "Accepted";
+      }
+    });
 
+    //console.log(renterrequestmachinelist);
+
+    const renterrequest = await UserMachine.updateOne(
+      { userid: renterid },
+      {
+        $set: {
+          rented: renterrequestmachinelist,
+        },
+      }
+    );
+
+    const owneruser = await UserMachine.find({ userid: ownerid });
+
+    const singleowner = owneruser[0];
+    const ownermachinesownedlist = singleowner.owned;
+    ownermachinesownedlist.forEach((item) => {
+      if (item.machineid === machineid) {
+        item.status = false;
+      }
+    });
+
+    const ownermachinestatus = await UserMachine.updateOne(
+      { userid: ownerid },
+      {
+        $set: {
+          owned: ownermachinesownedlist,
+        },
+      }
+    );
+
+    const updatebidamount = await Machine.updateOne(
+      { _id: machineid },
+      {
+        $set: {
+          rentamount: bidamount,
+        },
+      }
+    );
+
+    resp.status(200).json({
+      status: "true",
+      message: "Request Accepted Successfully",
+      activeRequest,
+    });
+  } catch (err) {
+    console.log(err);
+    resp
+      .status(500)
+      .json({ status: "false", message: err.response.data.message });
+  }
+};
+
+//Get active Rent with machine ID
+
+const getactiverental = async (req, resp) => {
+  try {
+    const { machineid } = req.body;
+    const activerentdata = await ActiveRental.find({ machineid });
+    if (!activerentdata) {
+      resp
+        .status(400)
+        .json({ status: "false", message: "Rent data not found" });
     }
-    catch(err)
-    {
-        console.log(err);
-        resp.status(500).json({status:'false',message:err.response.data.message});
-    }
+    resp
+      .status(200)
+      .json({
+        status: "true",
+        message: "Data fetched Successfully",
+        activerentdata,
+      });
+  } catch (err) {
+    console.log(err);
+    resp
+      .status(500)
+      .json({ status: "false", message: err.response.data.message });
+  }
+};
 
-}
-
-module.exports = { rentrequest ,rentaccept};
+module.exports = { rentrequest, rentaccept, getactiverental };

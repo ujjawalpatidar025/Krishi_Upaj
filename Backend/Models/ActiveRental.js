@@ -16,15 +16,15 @@ const ActiveRentalSchema = new Schema(
       type: Number,
     },
     tenure: {
-      type: Number,
+      type: String,
     },
     rentstatus: {
-      type: Boolean,
+      type: String,
       default: true,
     },
   },
   { timestamps: true }
 );
 
-const ActiveRental = mongoose.model("machinerequests", ActiveRentalSchema);
+const ActiveRental = mongoose.model("activerentalist", ActiveRentalSchema);
 module.exports = ActiveRental;

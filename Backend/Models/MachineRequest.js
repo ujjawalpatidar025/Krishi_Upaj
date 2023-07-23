@@ -33,5 +33,5 @@ const MachineRequestSchema = new Schema(
   { timestamps: true }
 );
 
-const MachineRequest = mongoose.model("machinerequests", MachineRequestSchema);
+const MachineRequest = mongoose.model("machinerequestslists", MachineRequestSchema);
 module.exports = MachineRequest;
