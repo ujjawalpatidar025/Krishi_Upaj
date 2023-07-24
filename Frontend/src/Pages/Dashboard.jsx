@@ -97,7 +97,7 @@ const Dashboard = () => {
           <Navbar />
           <header className="bg-white py-5 text-white">
             <div className="container mx-auto px-4">
-              <h1 className="text-3xl md:text-4xl font-semibold text-green-500  text-center md:text-left">
+              <h1 className="text-3xl md:text-4xl font-semibold px-2 text-green-500  text-center md:text-left">
                 Dashboard
               </h1>
             </div>
@@ -109,22 +109,22 @@ const Dashboard = () => {
                 <div className="containver mx-auto px-4">
                   <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
                     <aside className="md:col-span-1 border-2 border-gray-300  shadow-lg rounded-lg p-4">
-                      <h2 className="text-3xl text-gray-400 text-center  font-semibold mb-4">
+                      <h2 className="text-3xl text-gray-600 text-center  font-semibold mb-4">
                         Navigations
                       </h2>
                       <hr />
                       <ul className="space-y-2 h-40">
-                        <li className="cursor-pointer mt-4  text-xl py-2 rounded-3xl text-center  text-gray-400 hover:bg-gray-100">
+                        <li className="cursor-pointer mt-4  text-xl py-2 rounded-3xl text-center  text-gray-600 hover:bg-gray-300">
                           User Profile
                         </li>
-                        <li className="cursor-pointer mt-4  text-xl py-2 rounded-3xl text-center text-gray-400 hover:bg-gray-100">
+                        <li className="cursor-pointer mt-4  text-xl py-2 rounded-3xl text-center text-gray-600 hover:bg-gray-300">
                           User Machines
                         </li>
                       </ul>
                     </aside>
 
                     <section className="md:col-span-4 border-2 border-gray-300 bg-white shadow-lg rounded-lg p-8">
-                      <h2 className="text-3xl font-semibold text-center text-gray-400 mb-6">
+                      <h2 className="text-3xl font-semibold text-center text-gray-600 mb-6">
                         User Details
                       </h2>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-700">
