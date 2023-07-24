@@ -25,7 +25,7 @@ const App = () => {
 
   
   return (
-    <div>
+    <div className="max-sm:h-auto">
       <ToastContainer
         position="bottom-right"
         autoClose={3000}
@@ -48,6 +48,7 @@ const App = () => {
       }
       {/* <Navbar/> */}
       {/* <Loading/> */}
+      <div className="text-center text-gray-400">Design with Love ❤ IIST Coder [UP]</div>
     </div>
   );
 };

@@ -101,29 +101,30 @@ const Dashboard = () => {
                 Dashboard
               </h1>
             </div>
+           
           </header>
           {userDetails?.isUpdate ? (
             <>
-              <div className="bg-gray-100 min-h-[70vh] py-8">
-                <div className="container mx-auto px-4">
+              <div className=" min-h-[70h] py-7">
+                <div className="containver mx-auto px-4">
                   <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-                    <aside className="md:col-span-1 bg-green-400 shadow-lg rounded-lg p-4">
-                      <h2 className="text-3xl  text-center font-semibold text-white mb-4">
+                    <aside className="md:col-span-1 border-2 border-gray-300  shadow-lg rounded-lg p-4">
+                      <h2 className="text-3xl text-gray-400 text-center  font-semibold mb-4">
                         Navigations
                       </h2>
                       <hr />
                       <ul className="space-y-2 h-40">
-                        <li className="cursor-pointer mt-4  text-xl py-2 rounded-md text-center text-white hover:bg-green-500">
+                        <li className="cursor-pointer mt-4  text-xl py-2 rounded-3xl text-center  text-gray-400 hover:bg-gray-100">
                           User Profile
                         </li>
-                        <li className="cursor-pointer mt-4  text-xl py-2 rounded-md text-center text-white hover:bg-green-500">
+                        <li className="cursor-pointer mt-4  text-xl py-2 rounded-3xl text-center text-gray-400 hover:bg-gray-100">
                           User Machines
                         </li>
                       </ul>
                     </aside>
 
-                    <section className="md:col-span-4 bg-white shadow-lg rounded-lg p-8">
-                      <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6">
+                    <section className="md:col-span-4 border-2 border-gray-300 bg-white shadow-lg rounded-lg p-8">
+                      <h2 className="text-3xl font-semibold text-center text-gray-400 mb-6">
                         User Details
                       </h2>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-700">
@@ -132,7 +133,7 @@ const Dashboard = () => {
                           <p>{userDetails.firstname}</p>
                         </div>
                         <div className="border border-gray-300 p-4 rounded-lg shadow-md">
-                          <p className="font-semibold mb-2">Last Name</p>
+                          <p className="font-semibold mb-2">Last Name</p>  
                           <p>{userDetails.lastname}</p>
                         </div>
                         <div className="border border-gray-300 p-4 rounded-lg shadow-md">
