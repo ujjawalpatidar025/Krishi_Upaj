@@ -52,44 +52,42 @@ const Dashboard = () => {
     fetchdata();
   }, []);
 
-  const handlesubmit = async(e) =>{
+  const handlesubmit = async (e) => {
     const token = localStorage.getItem("token");
-    
-    if(!firstname||!lastname||!address||!pincode||!phonenumber)
-    {
+
+    if (!firstname || !lastname || !address || !pincode || !phonenumber) {
       toast.error("Fill all necessary Details");
-      
-    }
-    else
-    {
+    } else {
       setloading(true);
-    e.preventDefault();
-    try{
-      //console.log({token,_id,firstname,lastname,address,pincode,phonenumber,username})
-      const response = await axios.post('http://localhost:4000/api/users/updateUser',{
-        token,_id,firstname,lastname,address,pincode,phonenumber,username
-      });
-      setloading(false);
-      toast.success(response.data.message);
-      navigate('/');
-    
-      
-
+      e.preventDefault();
+      try {
+        //console.log({token,_id,firstname,lastname,address,pincode,phonenumber,username})
+        const response = await axios.post(
+          "http://localhost:4000/api/users/updateUser",
+          {
+            token,
+            _id,
+            firstname,
+            lastname,
+            address,
+            pincode,
+            phonenumber,
+            username,
+          }
+        );
+        setloading(false);
+        toast.success(response.data.message);
+        navigate("/");
+      } catch (err) {
+        toast.error(err.response.data.message);
+        console.log(err);
+        navigate("/signin");
+      }
     }
-    catch(err)
-    {
-     
-      toast.error(err.response.data.message);
-      console.log(err);
-      navigate('/signin');
-    }
-  }
-  }
+  };
 
-  
   return (
     <>
-      
       {loading ? (
         <Loading />
       ) : (
@@ -101,7 +99,6 @@ const Dashboard = () => {
                 Dashboard
               </h1>
             </div>
-           
           </header>
           {userDetails?.isUpdate ? (
             <>
@@ -112,7 +109,7 @@ const Dashboard = () => {
                       <h2 className="text-3xl text-gray-600 text-center  font-semibold mb-4">
                         Navigations
                       </h2>
-                      <hr />
+                      <hr className="h-[2px] bg-gray-600" />
                       <ul className="space-y-2 h-40">
                         <li className="cursor-pointer mt-4  text-xl py-2 rounded-3xl text-center  text-gray-600 hover:bg-gray-300">
                           User Profile
@@ -133,16 +130,18 @@ const Dashboard = () => {
                           <p>{userDetails.firstname}</p>
                         </div>
                         <div className="border border-gray-300 p-4 rounded-lg shadow-md">
-                          <p className="font-semibold mb-2">Last Name</p>  
+                          <p className="font-semibold mb-2">Last Name</p>
                           <p>{userDetails.lastname}</p>
                         </div>
                         <div className="border border-gray-300 p-4 rounded-lg shadow-md">
                           <p className="font-semibold mb-2">Username</p>
-                          <p className="max-sm:h-auto h-[100%]">{userDetails.username}</p>
+                          <p className="max-sm:h-auto h-[100%]">
+                            {userDetails.username}
+                          </p>
                         </div>
                         <div className="border border-gray-300 p-4 rounded-lg shadow-md">
                           <p className="font-semibold mb-2">Address</p>
-                          <p >{userDetails.address}</p>
+                          <p>{userDetails.address}</p>
                         </div>
                         <div className="border border-gray-300 p-4 rounded-lg shadow-md">
                           <p className="font-semibold mb-2">Pincode</p>
@@ -180,7 +179,7 @@ const Dashboard = () => {
                         name="firstname"
                         required
                         value={firstname}
-                        onChange={(e)=>setfirstname(e.target.value)}
+                        onChange={(e) => setfirstname(e.target.value)}
                         className="w-full px-3 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-green-400"
                       />
                     </div>
@@ -198,7 +197,7 @@ const Dashboard = () => {
                         name="lastname"
                         required
                         value={lastname}
-                        onChange={(e)=>setlastname(e.target.value)}
+                        onChange={(e) => setlastname(e.target.value)}
                         className="w-full px-3 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-green-400"
                       />
                     </div>
@@ -216,7 +215,7 @@ const Dashboard = () => {
                         name="address"
                         required
                         value={address}
-                        onChange={(e)=>setaddress(e.target.value)}
+                        onChange={(e) => setaddress(e.target.value)}
                         className="w-full px-3 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-green-400"
                       />
                     </div>
@@ -233,8 +232,7 @@ const Dashboard = () => {
                         id="phone"
                         name="phone"
                         required
-                       
-                        onChange={(e)=>setphonenumber(e.target.value)}
+                        onChange={(e) => setphonenumber(e.target.value)}
                         className="w-full px-3 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-green-400"
                       />
                     </div>
@@ -251,8 +249,7 @@ const Dashboard = () => {
                         id="pincode"
                         name="pincode"
                         required
-                       
-                        onChange={(e)=>setpincode(e.target.value)}
+                        onChange={(e) => setpincode(e.target.value)}
                         className="w-full px-3 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-green-400"
                       />
                     </div>
