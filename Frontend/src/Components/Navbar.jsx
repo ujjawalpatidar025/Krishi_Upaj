@@ -4,12 +4,14 @@ import Modals from "./Modals.jsx";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { remove } from "../Redux/Slices/authReducer";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [modal, setmodal] = useState(false);
@@ -30,13 +32,13 @@ const Navbar = () => {
   };
 
   return (
-    <nav className=" sticky top-0 shadow-md shadow-gray-400 bg-white z-40">
+    <nav className=" sticky top-0 shadow-md shadow-gray-400 bg-[#fbf8f8] z-40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
             <img className="h-12 w-auto" src={logo} alt="Logo" />
-            <div className="text-3xl h-12 w-20  mx-3 flex  text-gray-700 items-center justify-center">
+            <div className="text-3xl h-12 w-20  mx-3 flex  text-gray-700 items-center justify-center font-extrabold ">
               <span className="text-green-500">U</span>paj
             </div>
           </div>
@@ -46,38 +48,44 @@ const Navbar = () => {
             <div className="mx-3 space-x-2">
               <Link
                 to="/"
-                className="text-green-700 font-medium border-x-4 border-white  hover:border-solid hover:rounded-3xl    hover:border-green-700 px-3 py-1 rounded-md  "
+                className="text-green-700 font-extrabold border-x-4 border-[#fbf8f8] hover:border-solid hover:rounded-3xl   hover:border-green-700 px-3 py-1 rounded-md  "
               >
                 Home
               </Link>
               <Link
                 to="/services"
-                className="text-green-700 font-medium border-x-4 border-white  hover:border-solid hover:rounded-3xl   hover:border-green-700 px-3 py-1 rounded-md  "
+                className="text-green-700 font-extrabold border-x-4 border-[#fbf8f8]  hover:border-solid hover:rounded-3xl   hover:border-green-700 px-3 py-1 rounded-md  "
               >
                 Services
               </Link>
 
               <Link
                 to="/machines"
-                className="text-green-700 font-medium border-x-4 border-white  hover:border-solid hover:rounded-3xl   hover:border-green-700 px-3 py-1 rounded-md  "
+                className="text-green-700 font-extrabold border-x-4 border-[#fbf8f8]  hover:border-solid hover:rounded-3xl   hover:border-green-700 px-3 py-1 rounded-md  "
               >
                 Machines
               </Link>
               <Link
                 to="/dashboard"
-                className="text-green-700 font-medium border-x-4 border-white  hover:border-solid hover:rounded-3xl   hover:border-green-700 px-3 py-1 rounded-md  "
+                className="text-green-700 font-extrabold border-x-4 border-[#fbf8f8]  hover:border-solid hover:rounded-3xl   hover:border-green-700 px-3 py-1 rounded-md  "
               >
                 Dashboard
               </Link>
+              <Link
+                to="/dashboard"
+                className="text-green-700 font-extrabold border-x-4 border-[#fbf8f8]  hover:border-solid hover:rounded-3xl   hover:border-green-700 px-3 py-1 rounded-md  "
+              >
+                Contact
+              </Link>
 
               <Link
-                to="/addproduct"
-                className="text-green-700 font-medium border-x-4 border-white  hover:border-solid hover:rounded-3xl   hover:border-green-700 px-3 py-1 rounded-md  "
+                to="/addproduct" 
+                className="text-green-700 font-extrabold border-x-4 border-[#fbf8f8]  hover:border-solid hover:rounded-3xl   hover:border-green-700 px-3 py-1 rounded-md  "
               >
                 Add Product
               </Link>
               <Link
-                className="text-green-700 font-medium border-x-4 border-white  hover:border-solid hover:rounded-3xl   hover:border-green-700 px-3 py-1 rounded-md  "
+                className="text-green-700 font-extrabold border-x-4 border-[#fbf8f8]  hover:border-solid hover:rounded-3xl   hover:border-green-700 px-3 py-1 rounded-md  "
                 onClick={() => setmodal(true)}
               >
                 Signout
@@ -219,8 +227,15 @@ const Navbar = () => {
               >
                 Dashboard
               </Link>
+
               <Link
-                to="/addproduct"
+                to="/dashboard"
+                className="text-green-700  hover:bg-green-100  hover:border-xl block px-3 py-2 rounded-md text-base font-medium"
+              >
+                Contact
+              </Link>
+              <Link
+                to= "/addproduct" 
                 className="text-green-700  hover:bg-green-100  hover:border-xl block px-3 py-2 rounded-md text-base font-medium"
               >
                 Add Product

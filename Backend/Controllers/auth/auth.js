@@ -9,6 +9,8 @@ const signup = async (req, resp) => {
   const { username } = req.body;
   const userpassword = req.body.password;
 
+ 
+
   try {
     if (!username || !userpassword)
       resp
@@ -53,7 +55,7 @@ const signup = async (req, resp) => {
     console.log(err);
     resp
       .status(500)
-      .json({ status: "false", message: err.response.data.message });
+      .json({ status: "false", message: err });
   }
 };
 
@@ -91,7 +93,7 @@ const signin = async (req, resp) => {
     console.log(err);
     resp
       .status(500)
-      .json({ status: "false", message: err.response.data.message });
+      .json({ status: "false", message: err });
   }
 };
 
@@ -132,7 +134,7 @@ const updateUser = async (req, resp) => {
     console.log(err);
     resp
       .status(500)
-      .json({ status: "false", message: err.response.data.message });
+      .json({ status: "false", message: err});
   }
 };
 
@@ -157,7 +159,7 @@ const isAuthenticated = async (req, resp) => {
     console.log(err);
     resp
       .status(500)
-      .json({ status: "false", message: err.response.data.message });
+      .json({ status: "false", message: err });
   }
 };
 
@@ -176,7 +178,7 @@ const getUser = async (req, resp) => {
     console.log(err);
     resp
       .status(500)
-      .json({ status: "false", message: err.response.data.message });
+      .json({ status: "false", message: err});
   }
 };
 

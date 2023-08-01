@@ -93,20 +93,20 @@ const Dashboard = () => {
       ) : (
         <>
           <Navbar />
-          <header className="bg-white py-5 text-white">
+          <header className="bg-[#fcfaf9]  py-5 text-white">
             <div className="container mx-auto px-4">
-              <h1 className="text-3xl md:text-4xl font-semibold px-2 text-green-500  text-center md:text-left">
+              <h1 className="text-7xl max-md:text-4xl font-extrabold px-2 text-gray-300  text-center md:text-left">
                 Dashboard
               </h1>
             </div>
           </header>
           {userDetails?.isUpdate ? (
             <>
-              <div className=" min-h-[70h] py-7">
+              <div className=" min-h-[70h] py-7 bg-[#fcfaf9] h-screen ">
                 <div className="containver mx-auto px-4">
                   <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
                     <aside className="md:col-span-1 border-2 border-gray-300  shadow-lg rounded-lg p-4">
-                      <h2 className="text-3xl text-gray-600 text-center  font-semibold mb-4">
+                      <h2 className="text-3xl text-gray-400 text-center  font-bold mb-4">
                         Navigations
                       </h2>
                       <hr className="h-[2px] bg-gray-600" />
@@ -120,8 +120,8 @@ const Dashboard = () => {
                       </ul>
                     </aside>
 
-                    <section className="md:col-span-4 border-2 border-gray-300 bg-white shadow-lg rounded-lg p-8">
-                      <h2 className="text-3xl font-semibold text-center text-gray-600 mb-6">
+                    <section className="md:col-span-4 border-2 border-gray-300 bg-[#fcfaf9]  shadow-lg rounded-lg p-8">
+                      <h2 className="text-3xl font-bold text-center text-gray-400 mb-6">
                         User Details
                       </h2>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-700">

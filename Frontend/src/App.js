@@ -13,6 +13,7 @@ import Loading from "./Components/Loading.jsx";
 import axios from "axios";
 import Dashboard from "./Pages/Dashboard.jsx"
 import { add, gettoken } from "./Redux/Slices/authReducer.js";
+import AddProduct from "./Pages/AddProduct.jsx";
 
 
 const App = () => {
@@ -44,6 +45,7 @@ const App = () => {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/" element={<ProtectedRoute component={Home} />}></Route>
         <Route path="/dashboard" element={<ProtectedRoute component={Dashboard} />}></Route>
+        <Route path="/addproduct" element={<ProtectedRoute component={AddProduct} />}></Route>
       </Routes>
       }
       {/* <Navbar/> */}
