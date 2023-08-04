@@ -2,6 +2,8 @@ const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
 
 const authRoutes = require("./Routes/authRoutes.js");
 const machineRoutes =  require("./Routes/machineRoutes.js");
@@ -11,6 +13,7 @@ const app = express();
 dotenv.config();
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
+app.use('/uploads',express.static('uploads'));
 
 const MONGO_URL = process.env.MONGO_URL;
 const PORT = process.env.PORT || 5001;
@@ -35,7 +38,7 @@ const connection = () => {
 app.use(express.json());
 
 app.use("/api/users", authRoutes);
-app.use("/api/machines", machineRoutes);
+app.use("/api/machines",upload.single('image'),machineRoutes);
 app.use("/api/requests", requestRoutes);
 // app.use("/messages", verifyToken, messageRoute);
 // app.use("/queries", verifyToken, queryRoute);

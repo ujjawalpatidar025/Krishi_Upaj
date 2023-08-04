@@ -50,7 +50,7 @@ const Home = () => {
     fetchdata();
   }, []);
   return (
-    <div className="max-sm:overflow-x-hidden ">
+    <div className="max-sm:overflow-x-hidden overflow-x-hidden  ">
       <Navbar />
       <div className="w-full h-auto flex justify-between items-center  bg-[#fcfaf9] wrap overflow-x-hidden">
         <div className="w-[50vw] h-[120%]">
@@ -77,7 +77,7 @@ const Home = () => {
           />
         </div>
 
-        <section class="w-[50vw] max-sm:m-auto max-sm:top-[90%] h-[100vh] p-3 z-20 max-xl:w-[50vw] max-lg:absolute  max-lg:top-[90%] max-lg:right-10 max-lg:w-[70vw] max-md:w-[90vw] ">
+        <section class="w-[45vw] max-sm:m-auto max-sm:top-[90%] h-[100vh] p-3 z-20 max-xl:w-[50vw] max-lg:absolute  max-lg:top-[90%] max-lg:right-10 max-lg:w-[70vw] max-md:w-[90vw] ">
           <h1 className="text-[10rem] max-sm:text-[4rem]  font-extrabold  text-gray-300 max-xl:text-[6rem] max-lg:text-gray-400 max-lg:text-right max-md:text-center">
             <span className="text-[12rem] max-sm:text-[6rem]">S</span>ervices
           </h1>

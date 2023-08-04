@@ -5,8 +5,8 @@ const MachineRequest = require('../../Models/MachineRequest.js');
 // Add machines Controller
 
 const addMachine = async (req, resp) => {
-  const { _id, title, type, shortdescription, description, year, rentamount } =
-    req.body;
+  const { _id,title, type, shortdescription, description, year, rentamount } = req.body;
+  const image = req.file.path;
 
   try {
     if (
@@ -15,7 +15,8 @@ const addMachine = async (req, resp) => {
       !shortdescription ||
       !description ||
       !year ||
-      !rentamount
+      !rentamount||
+      !image
     )
       resp
         .status(400)
@@ -29,7 +30,7 @@ const addMachine = async (req, resp) => {
       description,
       year,
       rentamount,
-      image: "",
+      image,
       status: true,
     });
 
@@ -148,4 +149,29 @@ const updateAmount = async (req, resp) => {
   }
 };
 
-module.exports = { addMachine, updateStatus, updateAmount };
+
+//get machine 
+
+
+const getMachine = async(req,resp)=>{
+    try{
+
+      const machines = await Machine.find();
+      if(!machines)
+      {
+        resp.status(500).json({status:'false',message:"Internal Server Error"});  
+      }
+      else
+      {
+        resp.status(200).json({status:'true',message:"Machines Listed Successfully",machines});
+      }
+    }
+    catch(err)
+    {
+      console.log(err);
+      resp.status(400).json({status:'false',message:err.response.data.message});
+    }
+
+}
+
+module.exports = { addMachine, updateStatus, updateAmount ,getMachine };

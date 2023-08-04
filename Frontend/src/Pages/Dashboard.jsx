@@ -102,7 +102,7 @@ const Dashboard = () => {
           </header>
           {userDetails?.isUpdate ? (
             <>
-              <div className=" min-h-[70h] py-7 bg-[#fcfaf9] h-screen ">
+              <div className=" min-h-[70h]  py-7 bg-[#fcfaf9] h-[75vh] ">
                 <div className="containver mx-auto px-4">
                   <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
                     <aside className="md:col-span-1 border-2 border-gray-300  shadow-lg rounded-lg p-4">
