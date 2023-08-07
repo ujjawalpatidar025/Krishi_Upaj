@@ -6,8 +6,8 @@ const MachineRequestSchema = new Schema(
     machineid: {
       type: String,
     },
-    machinename:{
-      type:String,
+    machinename: {
+      type: String,
     },
     status: {
       type: Boolean,
@@ -33,5 +33,8 @@ const MachineRequestSchema = new Schema(
   { timestamps: true }
 );
 
-const MachineRequest = mongoose.model("machinerequestslists", MachineRequestSchema);
+const MachineRequest = mongoose.model(
+  "machinerequestslists",
+  MachineRequestSchema
+);
 module.exports = MachineRequest;

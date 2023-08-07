@@ -1,11 +1,12 @@
 const Machine = require("../../Models/Machine.js");
 const UserMachine = require("../../Models/UserMachine.js");
-const MachineRequest = require('../../Models/MachineRequest.js');
+const MachineRequest = require("../../Models/MachineRequest.js");
 
 // Add machines Controller
 
 const addMachine = async (req, resp) => {
-  const { _id,title, type, shortdescription, description, year, rentamount } = req.body;
+  const { _id, title, type, shortdescription, description, year, rentamount } =
+    req.body;
   const image = req.file.path;
 
   try {
@@ -15,7 +16,7 @@ const addMachine = async (req, resp) => {
       !shortdescription ||
       !description ||
       !year ||
-      !rentamount||
+      !rentamount ||
       !image
     )
       resp
@@ -47,7 +48,7 @@ const addMachine = async (req, resp) => {
       {
         machineid: machine._id,
         machinename: machine.title,
-        status:true
+        status: true,
       },
     ];
     if (!isCreated) {
@@ -64,7 +65,7 @@ const addMachine = async (req, resp) => {
             owned: {
               machineid: machine._id,
               machinename: machine.title,
-              status:true
+              status: true,
             },
           },
         }
@@ -149,29 +150,30 @@ const updateAmount = async (req, resp) => {
   }
 };
 
+//get machine
 
-//get machine 
-
-
-const getMachine = async(req,resp)=>{
-    try{
-
-      const machines = await Machine.find();
-      if(!machines)
-      {
-        resp.status(500).json({status:'false',message:"Internal Server Error"});  
-      }
-      else
-      {
-        resp.status(200).json({status:'true',message:"Machines Listed Successfully",machines});
-      }
+const getMachine = async (req, resp) => {
+  try {
+    const machines = await Machine.find();
+    if (!machines) {
+      resp
+        .status(500)
+        .json({ status: "false", message: "Internal Server Error" });
+    } else {
+      resp
+        .status(200)
+        .json({
+          status: "true",
+          message: "Machines Listed Successfully",
+          machines,
+        });
     }
-    catch(err)
-    {
-      console.log(err);
-      resp.status(400).json({status:'false',message:err.response.data.message});
-    }
+  } catch (err) {
+    console.log(err);
+    resp
+      .status(400)
+      .json({ status: "false", message: err.response.data.message });
+  }
+};
 
-}
-
-module.exports = { addMachine, updateStatus, updateAmount ,getMachine };
+module.exports = { addMachine, updateStatus, updateAmount, getMachine };

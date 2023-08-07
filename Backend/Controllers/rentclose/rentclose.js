@@ -17,7 +17,7 @@ const rentclose = async (req, resp) => {
         },
       }
     );
-    const activeclose = await ActiveRental.deleteOne({machineid});
+    const activeclose = await ActiveRental.deleteOne({ machineid });
 
     const owneruser = await UserMachine.find({ userid: ownerid });
 
@@ -30,43 +30,39 @@ const rentclose = async (req, resp) => {
     });
 
     const ownermachinestatus = await UserMachine.updateOne(
-        { userid: ownerid },
-        {
-          $set: {
-            owned: ownermachinesownedlist,
-          },
-        }
-      );
+      { userid: ownerid },
+      {
+        $set: {
+          owned: ownermachinesownedlist,
+        },
+      }
+    );
 
+    const renteruser = await UserMachine.find({ userid: renterid });
 
-      const renteruser = await UserMachine.find({ userid: renterid });
+    const singlerenter = renteruser[0];
 
-      const singlerenter = renteruser[0];
-  
-      const renterrequestmachinelist = singlerenter.rented;
-      renterrequestmachinelist.forEach((item) => {
-        if (item.machineid === machineid) {
-          item.requeststatus = "Closed";
-        }
-      });
-  
-      //console.log(renterrequestmachinelist);
-  
-      const renterrequest = await UserMachine.updateOne(
-        { userid: renterid },
-        {
-          $set: {
-            rented: renterrequestmachinelist,
-          },
-        }
-      );
+    const renterrequestmachinelist = singlerenter.rented;
+    renterrequestmachinelist.forEach((item) => {
+      if (item.machineid === machineid) {
+        item.requeststatus = "Closed";
+      }
+    });
 
+    //console.log(renterrequestmachinelist);
 
-      resp.status(200).json({status:'true',message:"Rent Connection Closed Successfully"});
+    const renterrequest = await UserMachine.updateOne(
+      { userid: renterid },
+      {
+        $set: {
+          rented: renterrequestmachinelist,
+        },
+      }
+    );
 
-
-
-
+    resp
+      .status(200)
+      .json({ status: "true", message: "Rent Connection Closed Successfully" });
   } catch (err) {
     console.log(err);
     resp

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Link,useNavigate } from "react-router-dom";
-import axios from 'axios';
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
@@ -14,26 +14,25 @@ const SignUp = () => {
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
   const [submitLoader, setsubmitLoader] = useState(false);
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     setsubmitLoader(true);
     e.preventDefault();
-    try{
-      const response = await axios.post('http://localhost:4000/api/users/signup',{username,password});
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/api/users/signup",
+        { username, password }
+      );
       console.log(response);
-      if(response.data.status=='false')
-      toast.error(response.data.message);
-      else{
+      if (response.data.status == "false") toast.error(response.data.message);
+      else {
         toast.success(response.data.message);
-        localStorage.setItem('token',response.data.token);
+        localStorage.setItem("token", response.data.token);
         dispatch(add(response.data.others));
         dispatch(gettoken(response.data.token));
-        navigate('/');
+        navigate("/");
       }
       setsubmitLoader(false);
-
-    }
-    catch(err)
-    {
+    } catch (err) {
       toast.error(err.response.data.message);
       setsubmitLoader(false);
     }
@@ -61,7 +60,7 @@ const SignUp = () => {
               id="username"
               type="email"
               placeholder="Email"
-              onChange={(e)=>setusername(e.target.value)}
+              onChange={(e) => setusername(e.target.value)}
               value={username}
             />
           </div>
@@ -77,13 +76,15 @@ const SignUp = () => {
               id="password"
               type="password"
               placeholder="Password"
-              onChange={(e)=>setpassword(e.target.value)}
+              onChange={(e) => setpassword(e.target.value)}
               value={password}
             />
-             <div className="text-sm text-white font-medium">Password must contain 8 characters consists of 1 lowercase, 1 uppercase, 1 digit and 1 special character</div>
-
+            <div className="text-sm text-white font-medium">
+              Password must contain 8 characters consists of 1 lowercase, 1
+              uppercase, 1 digit and 1 special character
+            </div>
           </div>
-         
+
           {submitLoader ? (
             <>
               <div role="status" className="text-center">

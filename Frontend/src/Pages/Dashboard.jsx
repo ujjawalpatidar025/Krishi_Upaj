@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { add, gettoken } from "../Redux/Slices/authReducer";
 import axios from "axios";
+import UserDashboard from "../Components/UserDashboard";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ const Dashboard = () => {
   const [address, setaddress] = useState("");
   const [pincode, setpincode] = useState("");
   const [phonenumber, setphonenumber] = useState("");
+  const [userProfile,setuserProfile]= useState(false);
   const _id = userDetails._id;
   const username = userDetails.username;
   useEffect(() => {
@@ -105,33 +107,34 @@ const Dashboard = () => {
               <div className=" min-h-[70h]  py-7 bg-[#fcfaf9] h-[75vh] ">
                 <div className="containver mx-auto px-4">
                   <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-                    <aside className="md:col-span-1 border-2 border-gray-300  shadow-lg rounded-lg p-4">
+                    <aside className="md:col-span-1 border-2 border-gray-300  shadow-lg rounded-lg p-4 h-[65vh]">
                       <h2 className="text-3xl text-gray-400 text-center  font-bold mb-4">
                         Navigations
                       </h2>
                       <hr className="h-[2px] bg-gray-600" />
                       <ul className="space-y-2 h-40">
-                        <li className="cursor-pointer mt-4  text-xl py-2 rounded-3xl text-center  text-gray-600 hover:bg-gray-300">
+                        <li className="cursor-pointer mt-4  text-xl py-2 rounded-3xl text-center  text-gray-600 hover:bg-gray-300" onClick={()=>setuserProfile(true)}>
                           User Profile
                         </li>
-                        <li className="cursor-pointer mt-4  text-xl py-2 rounded-3xl text-center text-gray-600 hover:bg-gray-300">
+                        <li className="cursor-pointer mt-4  text-xl py-2 rounded-3xl text-center text-gray-600 hover:bg-gray-300" onClick={()=>setuserProfile(false)}>
                           User Machines
                         </li>
                       </ul>
                     </aside>
-
-                    <section className="md:col-span-4 border-2 border-gray-300 bg-[#fcfaf9]  shadow-lg rounded-lg p-8">
+                  
+                    <section className="md:col-span-4 border-2 border-gray-300 bg-[#fcfaf9]  shadow-lg rounded-lg p-6">
+                    {userProfile?<>
                       <h2 className="text-3xl font-bold text-center text-gray-400 mb-6">
                         User Details
                       </h2>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-700">
                         <div className="border border-gray-300 p-4 rounded-lg shadow-md">
                           <p className="font-semibold mb-2">First Name</p>
-                          <p>{userDetails.firstname}</p>
+                          <p className="capitalize">{userDetails.firstname}</p>
                         </div>
                         <div className="border border-gray-300 p-4 rounded-lg shadow-md">
                           <p className="font-semibold mb-2">Last Name</p>
-                          <p>{userDetails.lastname}</p>
+                          <p className=" capitalize">{userDetails.lastname}</p>
                         </div>
                         <div className="border border-gray-300 p-4 rounded-lg shadow-md">
                           <p className="font-semibold mb-2">Username</p>
@@ -141,7 +144,7 @@ const Dashboard = () => {
                         </div>
                         <div className="border border-gray-300 p-4 rounded-lg shadow-md">
                           <p className="font-semibold mb-2">Address</p>
-                          <p>{userDetails.address}</p>
+                          <p className=" capitalize">{userDetails.address}</p>
                         </div>
                         <div className="border border-gray-300 p-4 rounded-lg shadow-md">
                           <p className="font-semibold mb-2">Pincode</p>
@@ -152,7 +155,9 @@ const Dashboard = () => {
                           <p>{userDetails.phonenumber}</p>
                         </div>
                       </div>
+                      </>:<UserDashboard/>}
                     </section>
+                   
                   </div>
                 </div>
               </div>

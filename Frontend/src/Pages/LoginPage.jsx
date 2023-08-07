@@ -14,7 +14,6 @@ const LoginPage = () => {
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
   const [submitLoader, setsubmitLoader] = useState(false);
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,7 +23,7 @@ const LoginPage = () => {
         "http://localhost:4000/api/users/signin",
         { username, password }
       );
-     
+
       if (response.data.status == "false") {
         toast.error(response.data.message);
         setsubmitLoader(false);

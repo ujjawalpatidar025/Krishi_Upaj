@@ -3,38 +3,36 @@ const { Schema } = require("mongoose");
 
 const UserMachineSchema = new Schema(
   {
-    userid:{
-        type:String,
-        defualt:'',
+    userid: {
+      type: String,
+      defualt: "",
     },
     owned: [
-        {
-          machineid:{
-            type:String,
-          },
-          machinename:{
-            type:String,
-
-          },
-          status:{
-            type:Boolean,
-          }
+      {
+        machineid: {
+          type: String,
         },
-      ],
-      rented:[
-        {
-          machineid:{
-            type:String,
-          },
-          machinename:{
-            type:String,
-
-          },
-          requeststatus:{
-            type:String
-          }
+        machinename: {
+          type: String,
         },
-      ]
+        status: {
+          type: Boolean,
+        },
+      },
+    ],
+    rented: [
+      {
+        machineid: {
+          type: String,
+        },
+        machinename: {
+          type: String,
+        },
+        requeststatus: {
+          type: String,
+        },
+      },
+    ],
   },
   { timestamps: true }
 );

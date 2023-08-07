@@ -9,8 +9,6 @@ const signup = async (req, resp) => {
   const { username } = req.body;
   const userpassword = req.body.password;
 
- 
-
   try {
     if (!username || !userpassword)
       resp
@@ -31,31 +29,33 @@ const signup = async (req, resp) => {
       resp
         .status(400)
         .json({ status: "false", message: "Not enought Strong Password" });
-    else
-    {
-    const salt = bcrypt.genSalt(10);
-    const hash = await bcrypt.hash(userpassword, 10);
+    else {
+      const salt = bcrypt.genSalt(10);
+      const hash = await bcrypt.hash(userpassword, 10);
 
-    const user = new User({ username, password: hash });
-    await user.save();
+      const user = new User({ username, password: hash });
+      await user.save();
 
-    if (!user)
+      if (!user)
+        resp
+          .status(500)
+          .json({ status: "false", message: "Internal Server Error" });
+
+      //creating jwt token
+      const { password, ...others } = user._doc;
+      const token = jwt.sign({ _id: user._id }, process.env.JWTTOKENKEY);
       resp
-        .status(500)
-        .json({ status: "false", message: "Internal Server Error" });
-
-    //creating jwt token
-    const { password, ...others } = user._doc;
-    const token = jwt.sign({ _id: user._id }, process.env.JWTTOKENKEY);
-    resp
-      .status(200)
-      .json({ status: "true", message: "SignUp Successfully", token, others });
+        .status(200)
+        .json({
+          status: "true",
+          message: "SignUp Successfully",
+          token,
+          others,
+        });
     }
   } catch (err) {
     console.log(err);
-    resp
-      .status(500)
-      .json({ status: "false", message: err });
+    resp.status(500).json({ status: "false", message: err });
   }
 };
 
@@ -91,9 +91,7 @@ const signin = async (req, resp) => {
       .json({ status: "true", message: "Login Success", token, others });
   } catch (err) {
     console.log(err);
-    resp
-      .status(500)
-      .json({ status: "false", message: err });
+    resp.status(500).json({ status: "false", message: err });
   }
 };
 
@@ -132,9 +130,7 @@ const updateUser = async (req, resp) => {
       .json({ status: "true", message: "Profile Updated Successfully" });
   } catch (err) {
     console.log(err);
-    resp
-      .status(500)
-      .json({ status: "false", message: err});
+    resp.status(500).json({ status: "false", message: err });
   }
 };
 
@@ -157,9 +153,7 @@ const isAuthenticated = async (req, resp) => {
     });
   } catch (err) {
     console.log(err);
-    resp
-      .status(500)
-      .json({ status: "false", message: err });
+    resp.status(500).json({ status: "false", message: err });
   }
 };
 
@@ -176,9 +170,7 @@ const getUser = async (req, resp) => {
     resp.status(200).json({ status: "true", message: "User Found", others });
   } catch (err) {
     console.log(err);
-    resp
-      .status(500)
-      .json({ status: "false", message: err});
+    resp.status(500).json({ status: "false", message: err });
   }
 };
 

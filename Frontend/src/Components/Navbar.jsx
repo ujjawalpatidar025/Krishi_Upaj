@@ -11,7 +11,6 @@ const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [modal, setmodal] = useState(false);
@@ -79,7 +78,7 @@ const Navbar = () => {
               </Link>
 
               <Link
-                to="/addproduct" 
+                to="/addproduct"
                 className="text-green-700 font-extrabold border-x-4 border-[#fbf8f8]  hover:border-solid hover:rounded-3xl   hover:border-green-700 px-3 py-1 rounded-md  "
               >
                 Add Product
@@ -235,7 +234,7 @@ const Navbar = () => {
                 Contact
               </Link>
               <Link
-                to= "/addproduct" 
+                to="/addproduct"
                 className="text-green-700  hover:bg-green-100  hover:border-xl block px-3 py-2 rounded-md text-base font-medium"
               >
                 Add Product

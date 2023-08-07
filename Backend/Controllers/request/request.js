@@ -68,19 +68,37 @@ const rentrequest = async (req, resp) => {
       });
       await newrequest.save();
     }
-
-    const usermachine = await UserMachine.updateOne(
-      { userid },
-      {
-        $push: {
-          rented: {
-            machineid,
-            machinename,
-            requeststatus: "Pending",
+    const availableUserMachine = await UserMachine.find({ userid });
+   
+    if (availableUserMachine.length!=0) {
+      const usermachine = await UserMachine.updateOne(
+        { userid },
+        {
+          $push: {
+            rented: {
+              machineid,
+              machinename,
+              requeststatus: "Pending",
+            },
           },
+        }
+      );
+    } else {
+     
+      const rented = [
+        {
+          machineid,
+          machinename,
+          requeststatus: "Pending",
         },
-      }
-    );
+      ];
+      const newUserMachine = new UserMachine({
+        userid,
+        rented: rented,
+      });
+      
+      await newUserMachine.save();
+    }
 
     if (bidamount > rentamount) {
       const amountupdateresponse = await Machine.updateOne(
@@ -205,13 +223,11 @@ const getactiverental = async (req, resp) => {
         .status(400)
         .json({ status: "false", message: "Rent data not found" });
     }
-    resp
-      .status(200)
-      .json({
-        status: "true",
-        message: "Data fetched Successfully",
-        activerentdata,
-      });
+    resp.status(200).json({
+      status: "true",
+      message: "Data fetched Successfully",
+      activerentdata,
+    });
   } catch (err) {
     console.log(err);
     resp

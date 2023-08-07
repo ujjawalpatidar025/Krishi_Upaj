@@ -7,25 +7,19 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProtectedRoute from "./Components/ProtectedRoute.jsx";
 import Navbar from "./Components/Navbar.jsx";
-import { useEffect ,useState} from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import Loading from "./Components/Loading.jsx";
 import axios from "axios";
-import Dashboard from "./Pages/Dashboard.jsx"
+import Dashboard from "./Pages/Dashboard.jsx";
 import { add, gettoken } from "./Redux/Slices/authReducer.js";
 import AddProduct from "./Pages/AddProduct.jsx";
 import Machine from "./Pages/Machine.jsx";
 
-
 const App = () => {
   const [loading, setloading] = useState(false);
-  const navigate= useNavigate();
+  const navigate = useNavigate();
 
-
- 
-
-
-  
   return (
     <div className="max-sm:h-auto ">
       <ToastContainer
@@ -40,19 +34,29 @@ const App = () => {
         pauseOnHover
         theme="light"
       />
-      {loading?<Loading/>:
-      <Routes>
-        <Route path="/signin" element={<LoginPage />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/" element={<ProtectedRoute component={Home} />}></Route>
-        <Route path="/dashboard" element={<ProtectedRoute component={Dashboard} />}></Route>
-        <Route path="/addproduct" element={<ProtectedRoute component={AddProduct} />}></Route>
-        <Route path="/machines" element={<ProtectedRoute component={Machine} />}></Route>
-      </Routes>
-      }
+      {loading ? (
+        <Loading />
+      ) : (
+        <Routes>
+          <Route path="/signin" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/" element={<ProtectedRoute component={Home} />}></Route>
+          <Route
+            path="/dashboard"
+            element={<ProtectedRoute component={Dashboard} />}
+          ></Route>
+          <Route
+            path="/addproduct"
+            element={<ProtectedRoute component={AddProduct} />}
+          ></Route>
+          <Route
+            path="/machines"
+            element={<ProtectedRoute component={Machine} />}
+          ></Route>
+        </Routes>
+      )}
       {/* <Navbar/> */}
       {/* <Loading/> */}
-      
     </div>
   );
 };

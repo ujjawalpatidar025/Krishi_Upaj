@@ -25,7 +25,7 @@ const AddProduct = () => {
   const [rentamount, setrentamount] = useState("");
   const user = useSelector((state) => state.auth.user);
   let url;
- 
+
   // const [data, setdata] = useState({
   //   title: "",
   //   type: "",
@@ -55,7 +55,7 @@ const AddProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setloading(true);
-  
+
     const formData = new FormData();
     formData.append("title", title);
     formData.append("type", type);
@@ -78,10 +78,8 @@ const AddProduct = () => {
       );
       setloading(false);
       toast.success(response.data.message);
-        
-        navigate("/");
-     
-      
+
+      navigate("/");
     } catch (err) {
       setloading(false);
       toast.error(err.response.data.message);
@@ -125,12 +123,11 @@ const AddProduct = () => {
     <div className="max-sm:overflow-hidden">
       {loading ? (
         <Loading />
-      ) : 
-      (
+      ) : (
         <>
           <Navbar />
 
-          {isUpdate ? 
+          {isUpdate ? (
             <>
               <div className="overflow-hidden  bg-[#f0eceb] w-[100vw] max-sm:w-[100vw] max-sm:overflow-hidden">
                 <h1 className="text-7xl bg-[#f0eceb]  max-md:text-4xl font-extrabold px-12 text-gray-300  text-center md:text-left max-sm:py-3">
@@ -155,7 +152,6 @@ const AddProduct = () => {
                           class="appearance-none block w-full bg-white text-gray-700 border border-gray-300  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                           id="title"
                           type="text"
-
                           name="title"
                           required
                           value={title}
@@ -348,11 +344,14 @@ const AddProduct = () => {
                   </form>
                 </div>
 
-                <img src={mower} alt="machine image" className="h-[70vh] w-[33vw] m-auto max-lg:w-[30vw] max-lg:h-[50vh] max-md:w-[70vw] max-md:h-[60vh] max-sm:h-[35vh] max-sm:w-[70vw] max-sm:opacity-30" />
-                
+                <img
+                  src={mower}
+                  alt="machine image"
+                  className="h-[70vh] w-[33vw] m-auto max-lg:w-[30vw] max-lg:h-[50vh] max-md:w-[70vw] max-md:h-[60vh] max-sm:h-[35vh] max-sm:w-[70vw] max-sm:opacity-30"
+                />
               </div>
             </>
-           : 
+          ) : (
             <>
               <div className="bg-[#f0eceb] h-[90vh] ">
                 <div className=" text-5xl h-60 flex justify-center items-center font-bold text-gray-400 text-center">
@@ -366,10 +365,9 @@ const AddProduct = () => {
                 </Link>
               </div>
             </>
-          }
+          )}
         </>
-      )
-    }
+      )}
     </div>
   );
 };
