@@ -34,14 +34,14 @@ const Machine = () => {
     };
 
     return (
-      <div className="flex justify-start  max-sm:w-[90vw]">
+      <div className="flex justify-start  max-sm:w-[90vw] border border-gray-400 w-full rounded-t-lg">
         {tabs.map((tab, index) => (
           <button
             key={index}
             className={`py-2 px-4 max-sm:px-2 max-sm:text-sm ${
               activeTab === index
-                ? "bg-green-500 text-white rounded-t-lg"
-                : "border-b border-black"
+                ? " border-b-4 border-green-500 text-green-700 rounded-t-lg"
+                : ""
             }`}
             onClick={() => changeTab(index)}
           >
@@ -94,7 +94,7 @@ const Machine = () => {
 
     fetchdata();
   }, []);
-  console.log(isUpdate);
+
 
   return (
     <>
@@ -111,8 +111,8 @@ const Machine = () => {
                     Machines
                   </h1>
                 </div>
-                <div className="h-20 p-4 max-sm:h-28  pb-16  px-16 my-2 max-sm:my-0 max-sm:pb-0max-sm:p-0  w-[90vw] max-sm:w-[100vw]">
-                  <div className="container mx-auto pl-3 py-4 ">
+                <div className="h-20 p-4 max-sm:h-28  pb-16  px-16 my-2 max-sm:my-0 max-sm:pb-0max-sm:p-0   w-[97vw] max-sm:w-[100vw]">
+                  <div className="container mx-auto pl-3 py-4   ">
                     <TabBar
                       tabs={tabs}
                       activeTab={activeTab}

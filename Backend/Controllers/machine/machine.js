@@ -176,4 +176,25 @@ const getMachine = async (req, resp) => {
   }
 };
 
-module.exports = { addMachine, updateStatus, updateAmount, getMachine };
+
+const getUserMachine  = async(req,resp)=>{
+    const {userid} = req.body;
+    try{
+      const usermachine= await UserMachine.find({userid});
+      if(!usermachine)
+      {
+        resp.status(400).json({status:'false',message:"User Info Not found"});
+      }
+      else{
+        resp.status(200).json({status:'true',message:"User Record Found",usermachine});
+      }
+    }
+    catch(err)
+    {
+      console.log(err);
+      resp.status(500).json({status:'false',message:err.response.data.message});
+
+    }
+}
+
+module.exports = { addMachine, updateStatus, updateAmount, getMachine ,getUserMachine };

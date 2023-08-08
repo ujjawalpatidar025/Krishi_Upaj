@@ -20,7 +20,9 @@ const Dashboard = () => {
   const [address, setaddress] = useState("");
   const [pincode, setpincode] = useState("");
   const [phonenumber, setphonenumber] = useState("");
-  const [userProfile,setuserProfile]= useState(false);
+  const [userProfile,setuserProfile]= useState(true);
+  const [allmachines,setallmachines]= useState("");
+  const [usermachinedata,setusermachinedata]= useState("");
   const _id = userDetails._id;
   const username = userDetails.username;
   useEffect(() => {
@@ -33,12 +35,31 @@ const Dashboard = () => {
           "http://localhost:4000/api/users/isAuthenticated",
           { token }
         );
+        const user = response.data.others;
+        const machines = await axios.post(
+          "http://localhost:4000/api/machines/getmachines",
+          {
+            token,
+          }
+        );
+
+        setallmachines(machines.data.machines);
+        
+
+        const usermachine = await axios.post("http://localhost:4000/api/machines/getusermachine",{
+          userid:user._id,
+          token:token
+        })
+
+
+       setusermachinedata(usermachine.data.usermachine[0]);
+        
 
         if (!response) {
           setloading(false);
           navigate("/signin");
         }
-        const user = response.data.others;
+        
         setuserDetails(user);
         dispatch(add(user));
         dispatch(gettoken(token));
@@ -53,6 +74,7 @@ const Dashboard = () => {
 
     fetchdata();
   }, []);
+
 
   const handlesubmit = async (e) => {
     const token = localStorage.getItem("token");
@@ -155,7 +177,7 @@ const Dashboard = () => {
                           <p>{userDetails.phonenumber}</p>
                         </div>
                       </div>
-                      </>:<UserDashboard/>}
+                      </>:<UserDashboard usermachinedata={usermachinedata} machinedata = {allmachines}/>}
                     </section>
                    
                   </div>
