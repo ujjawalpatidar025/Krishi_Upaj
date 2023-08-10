@@ -23,6 +23,7 @@ const Dashboard = () => {
   const [userProfile,setuserProfile]= useState(true);
   const [allmachines,setallmachines]= useState("");
   const [usermachinedata,setusermachinedata]= useState("");
+  const [usermachinedatalength,setusermachinedatalength]= useState("");
   const _id = userDetails._id;
   const username = userDetails.username;
   useEffect(() => {
@@ -51,7 +52,7 @@ const Dashboard = () => {
           token:token
         })
 
-
+       setusermachinedatalength((usermachine.data.usermachine).length);
        setusermachinedata(usermachine.data.usermachine[0]);
         
 
@@ -109,6 +110,11 @@ const Dashboard = () => {
       }
     }
   };
+
+  const handlethrow =()=>{
+    toast.error("You dont have any owned or rented machines record");
+    navigate("/");
+  }
 
 
 
@@ -181,7 +187,8 @@ const Dashboard = () => {
                           <p>{userDetails.phonenumber}</p>
                         </div>
                       </div>
-                      </>:<UserDashboard usermachinedata={usermachinedata} machinedata = {allmachines}/>}
+                      </>:usermachinedatalength==0?handlethrow()
+                      :<UserDashboard usermachinedata={usermachinedata} machinedata = {allmachines}/>}
                     </section>
 
 
