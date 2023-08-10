@@ -15,6 +15,8 @@ import Dashboard from "./Pages/Dashboard.jsx";
 import { add, gettoken } from "./Redux/Slices/authReducer.js";
 import AddProduct from "./Pages/AddProduct.jsx";
 import Machine from "./Pages/Machine.jsx";
+import RequestList from "./Components/RequestList.jsx";
+import ActiveRentalCard from "./Components/ActiveRentalCard.jsx";
 
 const App = () => {
   const [loading, setloading] = useState(false);
@@ -53,6 +55,15 @@ const App = () => {
             path="/machines"
             element={<ProtectedRoute component={Machine} />}
           ></Route>
+          <Route
+          path="/machines/requestlist/:id"
+          element={<ProtectedRoute component={RequestList} />}
+        ></Route>
+
+        <Route
+        path="/machines/activerent/:id"
+        element={<ProtectedRoute component={ActiveRentalCard} />}
+      ></Route>
         </Routes>
       )}
       {/* <Navbar/> */}

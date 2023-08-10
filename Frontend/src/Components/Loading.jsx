@@ -3,15 +3,21 @@ import "./Loading.css";
 
 const Loading = () => {
   return (
-    <div className="w-screen h-screen bg-gray-100">
-      <div className="loader ">
-        <div className="inner one"></div>
-        <div className="inner two"></div>
-        <div className="inner three"></div>
-        <div className="text-3xl absolute top-36 font-bold text-green-600 left-20 max-sm:left-0">
-          Loading
-        </div>
+    <div className="w-screen h-screen bg-gray-100 flex justify-center items-center flex-wrap flex-column ">
+    <div className="  absolute bottom-[15%] text-5xl font-bold text-gray-400" >
+    Loading
+    </div>
+      <div class="middle">
+        <div class="bar bar1"></div>
+        <div class="bar bar2"></div>
+        <div class="bar bar3"></div>
+        <div class="bar bar4"></div>
+        <div class="bar bar5"></div>
+        <div class="bar bar6"></div>
+        <div class="bar bar7"></div>
+        <div class="bar bar8"></div>
       </div>
+     
     </div>
   );
 };

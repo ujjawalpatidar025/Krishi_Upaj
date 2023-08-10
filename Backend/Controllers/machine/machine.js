@@ -171,10 +171,41 @@ const getMachine = async (req, resp) => {
   } catch (err) {
     console.log(err);
     resp
-      .status(400)
+      .status(500)
       .json({ status: "false", message: err.response.data.message });
   }
 };
+
+
+//get machine with Machine ID 
+
+
+const getMachinebyId = async(req,resp)=>{
+  const {machineid} = req.body;
+  try{
+
+    const data = await Machine.findById({_id:machineid});
+
+    if(!data)
+    {
+      resp.status(401).json({status:'false',message:'Machine Not found'});
+
+    }
+    else{
+      resp.status(200).json({status:'true',message:"Machine Found", data});
+    }
+
+  }
+  catch(err)
+  {
+    console.log(err);
+    resp
+      .status(500)
+      .json({ status: "false", message: err.response.data.message });
+  }
+}
+
+//get UserMachine Status with User id 
 
 
 const getUserMachine  = async(req,resp)=>{
@@ -197,4 +228,4 @@ const getUserMachine  = async(req,resp)=>{
     }
 }
 
-module.exports = { addMachine, updateStatus, updateAmount, getMachine ,getUserMachine };
+module.exports = { addMachine, updateStatus, updateAmount, getMachine ,getUserMachine,getMachinebyId };

@@ -9,6 +9,7 @@ import { useNavigate, Link } from "react-router-dom";
 import Navbar from "../Components/Navbar";
 import Loading from "../Components/Loading";
 import MachineCard from "../Components/MachineCard";
+import UserMachineRenterCard from "./UserMachineRenterCard";
 
 const UserDashboard = ({ usermachinedata, machinedata }) => {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ const UserDashboard = ({ usermachinedata, machinedata }) => {
   const [isUpdate, setisupdate] = useState(true);
   const [filterusermachines, setfilterusermachines] = useState("");
   const [filterrentmachines, setfilterrentmachines] = useState("");
+  const [status, setstatus] = useState("");
   const ownedmachines = usermachinedata.owned;
   const rentedmachines = usermachinedata.rented;
 
@@ -91,8 +93,22 @@ const UserDashboard = ({ usermachinedata, machinedata }) => {
       const data = machinedata.filter(
         (item) => item.sellerid === usermachinedata.userid
       );
+      const rentusermachines = usermachinedata.rented;
+      const rentdata = machinedata.filter((item) => {
+        let flag = 0;
+        Object.values(rentusermachines).map((item2) => {
+          if (item2.machineid == item._id) {
+            flag = 1;
+
+            item.status = item2.requeststatus;
+          }
+        });
+        // console.log(item);
+        if (flag) return item;
+      });
 
       setfilterusermachines(data);
+      setfilterrentmachines(rentdata);
     };
 
     fetchdata();
@@ -113,7 +129,7 @@ const UserDashboard = ({ usermachinedata, machinedata }) => {
               </h1>
             ) : (
               Object.values(filterusermachines).map((item) => (
-                <UserMachineOwnerCard item={item} />
+                <UserMachineOwnerCard item={item} ownedmachines={ownedmachines} />
               ))
             )}
           </div>
@@ -124,12 +140,14 @@ const UserDashboard = ({ usermachinedata, machinedata }) => {
         {activeTab == 1 ? (
           <div>
             <div className="h-[46vh] w-full  overflow-y-scroll px-2">
-              {0 == 0 ? (
+              {rentedmachines.length == 0 ? (
                 <h1 className=" w-full h-full flex justify-center items-center text-6xl font-bold text-gray-300">
                   No Machines Rented
                 </h1>
               ) : (
-                ""
+                Object.values(filterrentmachines).map((item) => {
+                  return <UserMachineRenterCard item={item} />;
+                })
               )}
             </div>
           </div>

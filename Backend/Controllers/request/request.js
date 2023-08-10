@@ -218,16 +218,21 @@ const getactiverental = async (req, resp) => {
   try {
     const { machineid } = req.body;
     const activerentdata = await ActiveRental.find({ machineid });
-    if (!activerentdata) {
+   
+    if (activerentdata.length===0) {
+      
       resp
-        .status(400)
+        .status(401)
         .json({ status: "false", message: "Rent data not found" });
     }
+    else
+    {
     resp.status(200).json({
       status: "true",
       message: "Data fetched Successfully",
       activerentdata,
     });
+  }
   } catch (err) {
     console.log(err);
     resp
@@ -236,4 +241,33 @@ const getactiverental = async (req, resp) => {
   }
 };
 
-module.exports = { rentrequest, rentaccept, getactiverental };
+
+//get Machine requests cotroller
+
+const getMachineRequests = async(req,resp)=>{
+  const {machineid}=req.body;
+  try{
+    const machineRequests = await MachineRequest.find({machineid});
+    if(machineRequests.length==0)
+    {
+      resp.status(401).json({status:'false',message:'No requests till yet'});
+    }
+    else{
+      resp.status(200).json({status:'true',message:"Data Fetched Successfully",machineRequests});
+    }
+
+  }
+  catch(err)
+  {
+    console.log(err);
+    resp.status(500).json({status:'false',message:err.response.data.message});
+  }
+}
+
+
+
+
+
+
+
+module.exports = { rentrequest, rentaccept, getactiverental,getMachineRequests };
