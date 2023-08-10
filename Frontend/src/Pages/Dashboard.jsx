@@ -110,6 +110,10 @@ const Dashboard = () => {
     }
   };
 
+
+
+
+
   return (
     <>
       {loading ? (
@@ -135,10 +139,10 @@ const Dashboard = () => {
                       </h2>
                       <hr className="h-[2px] bg-gray-600" />
                       <ul className="space-y-2 h-40">
-                        <li className="cursor-pointer mt-4  text-xl py-2 rounded-3xl text-center  text-gray-600 hover:bg-gray-300" onClick={()=>setuserProfile(true)}>
+                        <li className="cursor-pointer mt-4  text-xl py-2 rounded-xl text-center  text-gray-600 hover:bg-green-300" onClick={()=>setuserProfile(true)}>
                           User Profile
                         </li>
-                        <li className="cursor-pointer mt-4  text-xl py-2 rounded-3xl text-center text-gray-600 hover:bg-gray-300" onClick={()=>setuserProfile(false)}>
+                        <li className="cursor-pointer mt-4  text-xl py-2 rounded-xl text-center text-gray-600 hover:bg-green-300" onClick={()=>setuserProfile(false)}>
                           User Machines
                         </li>
                       </ul>
@@ -179,6 +183,11 @@ const Dashboard = () => {
                       </div>
                       </>:<UserDashboard usermachinedata={usermachinedata} machinedata = {allmachines}/>}
                     </section>
+
+
+                    
+
+
                    
                   </div>
                 </div>

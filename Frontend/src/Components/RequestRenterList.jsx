@@ -1,23 +1,46 @@
+import axios from 'axios';
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 
 const RequestRenterList = (props) => {
-
+  const navigate = useNavigate();
   const [modal, setmodal] = useState(false);
-  const machine = props.machineData;
+  const [loading,setloading ] = useState(false);
+  const machine= props.machineData;
   const renterid = props.item.userid;
-  const sellerid = machine.sellerid;
+  const ownerid = machine.sellerid;
+  const bidamount = props.item.bidamount;
+  const tenure = props.item.tenure;
 
   const handleAllot = async(req,resp)=>{
+    setloading(true);
     const token = localStorage.getItem('token');
     try{
+      const machineid = machine._id;
+      const response = await axios.post("http://localhost:4000/api/requests/requestaccept",{token,machineid,renterid,ownerid,bidamount,tenure});
+      if(response.data.status)
+      {
+        setmodal(false);
+        toast.success("Machine Alloted Successfully, Refresh the Page");
+        navigate('/dashboard');
+      }
+      else
+      {
+        setmodal(false);
+        toast.error(response.data.message);
+        navigate('/');
+      }
+
+
 
     }
     catch(err)
     {
       console.log(err);
+      toast.error(err.response.data.message);
 
     }
   }
@@ -76,7 +99,8 @@ const RequestRenterList = (props) => {
                       class="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
                       onClick={handleAllot}
                     >
-                      Allot
+                    {loading?"Loading...":"Allot"}
+                     
                     </button>
                     <button
                       type="button"
