@@ -4,7 +4,7 @@ import "./Loading.css";
 const Loading = () => {
   return (
     <div className="w-screen h-screen bg-gray-100 flex justify-center items-center flex-wrap flex-column ">
-    <div className="  absolute bottom-[15%] text-5xl font-bold text-gray-400" >
+    <div className="  absolute bottom-[15%] text-5xl font-bold h-20 grad   bg-gradient-to-tr from-green-500 to-gray-500 bg-clip-text text-transparent" >
     Loading
     </div>
       <div class="middle">

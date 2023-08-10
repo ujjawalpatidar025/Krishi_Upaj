@@ -20,10 +20,10 @@ const Dashboard = () => {
   const [address, setaddress] = useState("");
   const [pincode, setpincode] = useState("");
   const [phonenumber, setphonenumber] = useState("");
-  const [userProfile,setuserProfile]= useState(true);
-  const [allmachines,setallmachines]= useState("");
-  const [usermachinedata,setusermachinedata]= useState("");
-  const [usermachinedatalength,setusermachinedatalength]= useState("");
+  const [userProfile, setuserProfile] = useState(true);
+  const [allmachines, setallmachines] = useState("");
+  const [usermachinedata, setusermachinedata] = useState("");
+  const [usermachinedatalength, setusermachinedatalength] = useState("");
   const _id = userDetails._id;
   const username = userDetails.username;
   useEffect(() => {
@@ -45,22 +45,23 @@ const Dashboard = () => {
         );
 
         setallmachines(machines.data.machines);
-        
 
-        const usermachine = await axios.post("http://localhost:4000/api/machines/getusermachine",{
-          userid:user._id,
-          token:token
-        })
+        const usermachine = await axios.post(
+          "http://localhost:4000/api/machines/getusermachine",
+          {
+            userid: user._id,
+            token: token,
+          }
+        );
 
-       setusermachinedatalength((usermachine.data.usermachine).length);
-       setusermachinedata(usermachine.data.usermachine[0]);
-        
+        setusermachinedatalength(usermachine.data.usermachine.length);
+        setusermachinedata(usermachine.data.usermachine[0]);
 
         if (!response) {
           setloading(false);
           navigate("/signin");
         }
-        
+
         setuserDetails(user);
         dispatch(add(user));
         dispatch(gettoken(token));
@@ -75,7 +76,6 @@ const Dashboard = () => {
 
     fetchdata();
   }, []);
-
 
   const handlesubmit = async (e) => {
     const token = localStorage.getItem("token");
@@ -111,14 +111,10 @@ const Dashboard = () => {
     }
   };
 
-  const handlethrow =()=>{
+  const handlethrow = () => {
     toast.error("You dont have any owned or rented machines record");
     navigate("/");
-  }
-
-
-
-
+  };
 
   return (
     <>
@@ -145,57 +141,71 @@ const Dashboard = () => {
                       </h2>
                       <hr className="h-[2px] bg-gray-600" />
                       <ul className="space-y-2 h-40">
-                        <li className="cursor-pointer mt-4  text-xl py-2 rounded-xl text-center  text-gray-600 hover:bg-green-300" onClick={()=>setuserProfile(true)}>
+                        <li
+                          className="cursor-pointer mt-4  text-xl py-2 rounded-xl text-center  text-gray-600 hover:bg-gray-200"
+                          onClick={() => setuserProfile(true)}
+                        >
                           User Profile
                         </li>
-                        <li className="cursor-pointer mt-4  text-xl py-2 rounded-xl text-center text-gray-600 hover:bg-green-300" onClick={()=>setuserProfile(false)}>
+                        <li
+                          className="cursor-pointer mt-4  text-xl py-2 rounded-xl text-center text-gray-600 hover:bg-gray-200"
+                          onClick={() => setuserProfile(false)}
+                        >
                           User Machines
                         </li>
                       </ul>
                     </aside>
-                  
+
                     <section className="md:col-span-4 border-2 border-gray-300 bg-[#fcfaf9]  shadow-lg rounded-lg p-6">
-                    {userProfile?<>
-                      <h2 className="text-3xl font-bold text-center text-gray-400 mb-6">
-                        User Details
-                      </h2>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-700">
-                        <div className="border border-gray-300 p-4 rounded-lg shadow-md">
-                          <p className="font-semibold mb-2">First Name</p>
-                          <p className="capitalize">{userDetails.firstname}</p>
-                        </div>
-                        <div className="border border-gray-300 p-4 rounded-lg shadow-md">
-                          <p className="font-semibold mb-2">Last Name</p>
-                          <p className=" capitalize">{userDetails.lastname}</p>
-                        </div>
-                        <div className="border border-gray-300 p-4 rounded-lg shadow-md">
-                          <p className="font-semibold mb-2">Username</p>
-                          <p className="max-sm:h-auto h-[100%]">
-                            {userDetails.username}
-                          </p>
-                        </div>
-                        <div className="border border-gray-300 p-4 rounded-lg shadow-md">
-                          <p className="font-semibold mb-2">Address</p>
-                          <p className=" capitalize">{userDetails.address}</p>
-                        </div>
-                        <div className="border border-gray-300 p-4 rounded-lg shadow-md">
-                          <p className="font-semibold mb-2">Pincode</p>
-                          <p>{userDetails.pincode}</p>
-                        </div>
-                        <div className="border border-gray-300 p-4 rounded-lg shadow-md">
-                          <p className="font-semibold mb-2">Phone Number</p>
-                          <p>{userDetails.phonenumber}</p>
-                        </div>
-                      </div>
-                      </>:usermachinedatalength==0?handlethrow()
-                      :<UserDashboard usermachinedata={usermachinedata} machinedata = {allmachines}/>}
+                      {userProfile ? (
+                        <>
+                          <h2 className="text-3xl font-bold text-center text-gray-400 mb-6">
+                            User Details
+                          </h2>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-700">
+                            <div className="border border-gray-300 p-4 rounded-lg shadow-md">
+                              <p className="font-semibold mb-2">First Name</p>
+                              <p className="capitalize">
+                                {userDetails.firstname}
+                              </p>
+                            </div>
+                            <div className="border border-gray-300 p-4 rounded-lg shadow-md">
+                              <p className="font-semibold mb-2">Last Name</p>
+                              <p className=" capitalize">
+                                {userDetails.lastname}
+                              </p>
+                            </div>
+                            <div className="border border-gray-300 p-4 rounded-lg shadow-md">
+                              <p className="font-semibold mb-2">Username</p>
+                              <p className="max-sm:h-auto h-[100%]">
+                                {userDetails.username}
+                              </p>
+                            </div>
+                            <div className="border border-gray-300 p-4 rounded-lg shadow-md">
+                              <p className="font-semibold mb-2">Address</p>
+                              <p className=" capitalize">
+                                {userDetails.address}
+                              </p>
+                            </div>
+                            <div className="border border-gray-300 p-4 rounded-lg shadow-md">
+                              <p className="font-semibold mb-2">Pincode</p>
+                              <p>{userDetails.pincode}</p>
+                            </div>
+                            <div className="border border-gray-300 p-4 rounded-lg shadow-md">
+                              <p className="font-semibold mb-2">Phone Number</p>
+                              <p>{userDetails.phonenumber}</p>
+                            </div>
+                          </div>
+                        </>
+                      ) : usermachinedatalength == 0 ? (
+                        handlethrow()
+                      ) : (
+                        <UserDashboard
+                          usermachinedata={usermachinedata}
+                          machinedata={allmachines}
+                        />
+                      )}
                     </section>
-
-
-                    
-
-
-                   
                   </div>
                 </div>
               </div>

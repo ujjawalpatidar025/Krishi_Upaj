@@ -69,31 +69,31 @@ const ActiveRentalCard = () => {
             Machine
           </h1>
         </div>
-        <div className=" w-full shadow-md rounded-lg  bg-blue-100 h-[30vh] mb-8 flex justify-between items-center px-16 flex-wrap ">
+        <div className=" w-full shadow-md rounded-lg   h-[30vh] mb-8 flex justify-between items-center px-16 flex-wrap ">
           <img
             src={`http://localhost:4000/${machine.image}`}
             className="h-[25vh] rounded-full "
           />
-          <div className="h-[30vh] w-[40vw]  p-3 ">
-            <h1 className="text-lg font-bold text-gray-600 my-2">
+          <div className="h-[30vh] w-[40vw]  px-3 py-1 ">
+            <h1 className="text-sm font-bold border border-gray-400 rounded-md p-2 text-gray-600 my-2">
               ID :{" "}
-              <span className="text-green-900">
+              <span className="text-green-900 text-sm">
                 {machine.type + machine.year + machine._id}
               </span>
             </h1>
-            <h1 className="text-lg font-bold text-gray-600 my-2 capitalize">
+            <h1 className=" font-bold text-sm border  border-gray-400 rounded-md p-2 text-gray-600 my-2 capitalize">
               Machine Model Name:{" "}
-              <span className="text-green-800 text-xl">{machine.title}</span>
+              <span className="text-green-800 text-md">{machine.title}</span>
             </h1>
-            <h1 className="text-lg font-bold text-gray-600 my-2 capitalize flex justify-center items-center w-1/2">
+            <h1 className=" font-bold text-sm border text-left border-gray-400 rounded-md p-2 text-gray-600 my-2 capitalize flex justify-start ">
               Machine Model Type:{" "}
               <h1 className="text-white bg-gray-600 py-1 w-24 rounded-full text-md mx-2 text-center">
                 {machine.type}
               </h1>
             </h1>
-            <h1 className="text-lg font-bold text-gray-600 my-2 capitalize">
+            <h1 className=" font-bold text-sm border  border-gray-400 rounded-md p-2 text-gray-600 my-2 capitalize">
               Machine Model Year:{" "}
-              <span className="text-green-800 text-xl">{machine.year}</span>
+              <span className="text-green-800 text-sm">{machine.year}</span>
             </h1>
           </div>
           <div className="h-[30vh] w-[20vw] ">
@@ -115,7 +115,7 @@ const ActiveRentalCard = () => {
         </div>
 
         <div className="h-[42vh] flex justify-between items-center flex-wrap ">
-          <div className="w-[45vw] h-full shadow-md rounded-lg  bg-blue-100 ">
+          <div className="w-[45vw] h-full shadow-md rounded-lg   border-gray-400 bg-stone-100 ">
             <div className="container mx-auto p-2">
               <h1 className="text-2xl max-md:text-4xl font-extrabold px-2 text-gray-400  text-center md:text-left">
                 Owner
@@ -159,7 +159,7 @@ const ActiveRentalCard = () => {
               </div>
             </div>
           </div>
-          <div className="w-[45vw] h-full shadow-md rounded-lg  bg-blue-100 ">
+          <div className="w-[45vw] h-full shadow-md rounded-lg   bg-stone-100 border-gray-400 ">
             <div className="container mx-auto p-2">
               <h1 className="text-2xl max-md:text-4xl font-extrabold px-2 text-gray-400  text-center md:text-left">
                 Renter
